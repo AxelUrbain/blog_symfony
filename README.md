@@ -8,6 +8,7 @@ Step 3 - php bin/console doctrine:migration:migrate
 Step 4 - php bin/console doctrine:fixtures:load
 
 To login : 
+
  Username : Admin
  Password : password
  
