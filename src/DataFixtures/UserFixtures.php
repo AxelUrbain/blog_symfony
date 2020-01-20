@@ -18,12 +18,13 @@ class UserFixtures extends Fixture
         $user->setUsername('admin');
         $user->setPassword($this->encoder->encodePassword($user, 'password'));
         $user->setRoles(['ROLE_ADMIN']);
-        $this->addReference('admin', $user);
+        $this->addReference('axel', $user);
+
         $user2 = new User();
         $user2->setUsername('user');
         $user2->setPassword($this->encoder->encodePassword($user2, 'password'));
         $user2->setRoles(['ROLE_USER']);
-        $this->addReference('user', $user2);
+        $this->addReference('steven', $user2);
         $manager->persist($user);
         $manager->persist($user2);
         $manager->flush();

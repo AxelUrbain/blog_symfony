@@ -14,7 +14,6 @@ security:
             memory:
                 users:
                     axel:
-                        # Ci-dessous le mot de passe "doe" encodé en bcrypt depuis la console :
                        password: password
                        roles: [ROLE_ADMIN]
     firewalls:
