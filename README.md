@@ -3,9 +3,9 @@ Step 1 - composer install
 
 Step 2 - php bin/console make:migration
 
-Step 3 - php bin/console d:m:m
+Step 3 - php bin/console doctrine:migration:migrate
 
-Step 4 - php bin/console d:f:l
+Step 4 - php bin/console doctrine:fixtures:load
 
 To login : 
  Username : Admin
