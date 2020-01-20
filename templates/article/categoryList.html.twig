@@ -1,0 +1,22 @@
+{% extends 'blog.html.twig' %}
+
+{% block h1 %} Mes articles {% endblock %}
+
+{% block articles %}
+    {% for article in articles %}
+        <div class="card text-dark bg-light" style="margin-bottom: 15px; margin-top: 15px">
+            <div class="card-body">
+                <h4 class="card-title">{{ article.title }}</h4>
+                <p class="card-text">{{ article.content | slice(1,sliceArticle) ~'...'}}</p>
+                <a class="btn btn-outline-primary" href="{{ path('viewAction', {'id' : article.id})}}">Lire plus</a>
+                <hr>
+                <h5 class="card-text">Commentaires</h5> <br>
+                {% for comment in article.comments %}
+                    <span>écrit par : {{ comment.author }}</span> <br>
+                    <span>{{ comment.title }}</span>
+                    <p class="card-text">{{ comment.message }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

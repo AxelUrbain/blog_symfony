@@ -1,0 +1,7 @@
+{% extends 'blog.html.twig' %}
+
+{% block h1 %} {{'Edition de article' | trans}} {{ article.id }} {% endblock %}
+
+{% block articles %}
+    {{ include('form/form.html.twig') }}
+{% endblock %}

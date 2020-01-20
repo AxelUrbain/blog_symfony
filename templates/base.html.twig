@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{{ 'Mon super blog'| trans }}{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css" >
+        {% endblock %}
+    </head>
+    <body>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">{{ 'Mon Blog' | trans }}</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav mr-auto">
+                        {% if not app.user %}
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{ path('home') }}">{{ 'Accueil' | trans }} <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_login') }}">{{'Connexion' | trans}}</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{ path('home') }}">{{ 'Accueil' | trans }} <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('listAction') }}">Blog</a>
+                            </li>
+                            {% block menu %}
+                            {% endblock %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_logout') }}">{{ 'Déconnexion' | trans }}</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <div class="btn-group" style="margin-right: 100px">
+                            <button type="button" class="btn btn-primary">{% if app.request.locale == 'fr' %}Français{% else %}Anglais{% endif %}</button>
+                            <div class="btn-group show" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                    <a class="dropdown-item" href="{{ path('home', {'_locale': 'en'}) }}">Anglais</a>
+                                    <a class="dropdown-item" href="{{ path('home', {'_locale': 'fr'}) }}">Français</a>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </nav>
+
+        <div class="container" style="padding-top: 20px">
+            {% if app.user %}
+                <p class="text-dark" style="">
+                    {{ 'Bienvenue' | trans }} {{ app.user.username }}
+                </p>
+            {% endif %}
+            {% for type, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type }} mt-3 text-center">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+            <div class="container">
+                <h1>{% block h1 %}{{ 'Le site symfony 5.0.1' | trans }}{% endblock %}</h1>
+
+                {% if not app.user %}
+                    <div class="row">
+                        {% block login %}{% endblock %}
+                    </div>
+                {% else %}
+                    <div class="row">
+                        {% if is_granted("ROLE_USER") %}
+                            <div class="col-lg-4 col-md-4">
+                                {% block menuLeft%}
+                                    {{ render(controller(
+                                        'App\\Controller\\ArticleController::recentArticlesAction'
+                                    )) }}
+                                {% endblock %}
+                            </div>
+                        {% endif %}
+                        <div class="col-lg-8 col-md-8">
+                            {% block body %}
+                                <h2></h2>
+                            {% endblock %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+        {% block footer %}
+            <!-- Footer -->
+            <footer class="text-center bg-dark" style="height: 100px">
+
+                <!-- Copyright -->
+                <div style="color: white; padding-top: 35px">© 2019 Copyright: Axel Urbain</div>
+                <!-- Copyright -->
+
+            </footer>
+            <!-- Footer -->
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="https://kit.fontawesome.com/271fb02698.js" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        {% endblock %}
+    </body>
+</html>

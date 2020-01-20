@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory;
 
 class CategoryFixtures extends Fixture
 {

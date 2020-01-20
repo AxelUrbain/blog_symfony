@@ -1,0 +1,52 @@
+{% extends 'blog.html.twig' %}
+
+{% block h1 %} {{'Mes articles' | trans }} {% endblock %}
+
+{% block articles %}
+    {% for article in articles %}
+        <div class="card text-dark bg-light" style="margin-bottom: 15px; margin-top: 15px">
+            <div class="card-header">
+                <div class="row">
+                    <div style="margin-right: 10px">
+                        <i class="fas fa-feather-alt"></i>
+                        {{ article.author }}
+                    </div>
+                    <div style="margin-right: 10px">
+                        <i class="fas fa-calendar-day"></i>
+                        {{ article.CreatedAt |date("m/d/Y") }}
+                    </div>
+                    <div style="margin-right: 10px">
+                        <i class="fas fa-eye"></i>
+                        {{ article.NbViews}}
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">{{ article.title }}</h4>
+                <p class="card-text">{{ article.content | slice(1,sliceArticle) ~'...'}}</p>
+                <a class="btn btn-outline-primary" href="{{ path('viewAction', {'id' : article.id})}}">{{'Lire plus' | trans}}</a>
+
+                {% if article.comments | length > 0 %}
+                    <hr>
+                    <h5>Commentaires</h5> <br>
+                    {% for comment in article.comments %}
+                        <div class="card bg-light mb-3" style="">
+                            <div class="card-header">
+                                <i class="fas fa-user-circle"></i>
+                                {{ comment.author }}
+                            </div>
+                            <div class="card-body">
+                                <i class="fas fa-pen-alt"></i>
+                                {{ comment.CreatedAt | date("m/d/Y") }}
+                                <hr>
+                                <h5 class="card-title">{{ comment.title }}</h5>
+                                <p class="card-text">{{ comment.message }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    {% include('pagination/pagination.html.twig') %}
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'blog.html.twig' %}
+
+{% block h1 %} {{'Ajouter un article' | trans}} {% endblock %}
+
+{% block articles %}
+    {{ include('form/form.html.twig') }}
+{% endblock %}

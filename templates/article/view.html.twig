@@ -1,0 +1,50 @@
+{% extends 'blog.html.twig' %}
+
+{% block articles %}
+
+    <h1> {% block h2 %} {{ article.title }} {% endblock %} </h1>
+
+    <div>
+        <h5>{{'Categorie(s)' | trans}} : </h5>
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                {% for categorie in article.categories %}
+                    <span class="badge badge-pill badge-dark">{{ categorie.name | trans }}</span>
+                {% endfor %}
+            </div>
+            {% if is_granted('ROLE_ADMIN') %}
+            <div class="" style="margin-right: 5px; margin-top: -7px">
+                <a href="{{ path('editAction', {'id' : article.id}) }}" class="btn btn-info" style="color: #FFFFFF"> {{'Modifier' | trans}} </a>
+            </div>
+            <div class="" style="margin-top: -7px">
+                <a href="{{ path('deleteAction', {'id' : article.id}) }}" class="btn btn-danger" style="color: #FFFFFF"> {{'Supprimer' | trans}} </a>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <p class="text" style="margin-top: 10px"> {{ article.content }}</p>
+
+    {% if article.comments|length >0 %}
+    <h3 class="text-dark">{{'Commentaires' | trans}} </h3>
+    {% for comment in article.comments %}
+        <div class="card bg-light text-dark mb-3" style="">
+            <div class="card-header">
+                <i class="fas fa-user-circle"></i>
+                {{ comment.author }}
+            </div>
+            <div class="card-body">
+                <i class="fas fa-pen-alt"></i>
+                {{ comment.CreatedAt | date("m/d/Y") }}
+                <hr>
+                <h5 class="card-title">{{ comment.title }}</h5>
+                <p class="card-text">{{ comment.message }}</p>
+            </div>
+        </div>
+    {% endfor %}
+    {% endif %}
+
+
+{% endblock %}
+

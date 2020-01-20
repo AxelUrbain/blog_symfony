@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="eOeSABC" resname="Titre">
+        <source>Titre</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="TvHfUfJ" resname="Mon titre">
+        <source>Mon titre</source>
+        <target>My title</target>
+      </trans-unit>
+      <trans-unit id="ewLDDYy" resname="Mon titre..">
+        <source>Mon titre..</source>
+        <target>My title ..</target>
+      </trans-unit>
+      <trans-unit id="em3lZw6" resname="Contenu">
+        <source>Contenu</source>
+        <target>Content</target>
+      </trans-unit>
+      <trans-unit id="EHuboyO" resname="Mon contenu par défaut">
+        <source>Mon contenu par défaut</source>
+        <target>Default Content</target>
+      </trans-unit>
+      <trans-unit id="WIDlngw" resname="Auteur">
+        <source>Auteur</source>
+        <target>Author</target>
+      </trans-unit>
+      <trans-unit id="oF8va3M" resname="Nombre de Vue">
+        <source>Nombre de Vue</source>
+        <target>Views</target>
+      </trans-unit>
+      <trans-unit id="vrLAu.G" resname="Publié">
+        <source>Publié</source>
+        <target>Published</target>
+      </trans-unit>
+      <trans-unit id="SxUSCLz" resname="Catégories">
+        <source>Catégories</source>
+        <target>Categories</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
